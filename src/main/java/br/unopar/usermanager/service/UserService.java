@@ -51,10 +51,14 @@ public class UserService {
 	}
 
 	@Transactional
-	public User update(User user) {
+	public User update(Long id, User user) {
 
 		try {
-			User entity = repository.getById(user.getId());
+			User entity = repository.getById(id);
+			entity.setEmail(user.getEmail());
+			entity.setNome(user.getNome());
+			entity.setPassword(user.getPassword());
+			entity.setTelefone(user.getTelefone());
 
 			entity = repository.save(entity);
 			return entity;

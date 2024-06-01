@@ -38,14 +38,19 @@ public class UserResource {
 	@PostMapping
 	public ResponseEntity<User> insert(@RequestBody User entity) {
 		User user = service.insert(entity);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder
+				.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(user.getId())
+				.toUri();
 
 		return ResponseEntity.created(uri).body(user);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User dto) {
-		User newUser = service.update(dto);
+	public ResponseEntity<User> update(@PathVariable Long id, 
+									   @RequestBody User dto) {
+		User newUser = service.update(id,dto);
 		return ResponseEntity.ok().body(newUser);
 	}
 
